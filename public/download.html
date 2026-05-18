@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Download pet-app</title></head>
+<body style="padding:50px;text-align:center;font-family:sans-serif">
+<h去打间Download</h2>
+<p>Loading download...</p>
+<script>
+fetch('/pet-app.tar.gz')
+  .then(r => r.blob())
+  .then(blob => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'pet-app.tar.gz';
+    document.body.innerHTML = '<h2>Click to download</h2><p><a href="'+a.href+'" download="pet-app.tar.gz">pet-app.tar.gz</a> (44KB)</p>';
+    a.click();
+  });
+</script>
+</body></html>
