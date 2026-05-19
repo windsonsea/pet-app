@@ -1,0 +1,71 @@
+baseURL = 'https://windsonsea.github.io/pet-app/'
+languageCode = 'zh-CN'
+title = '🐾 宠物管家'
+
+[params]
+  description = '一个温馨的宠物健康与日常管理应用'
+  repo = 'https://github.com/windsonsea/pet-app'
+  demo = 'https://pet-app-demo.example.com'
+
+[[params.features]]
+  icon = '🐶'
+  title = '宠物档案'
+  desc = '记录每只宠物的基本信息——名字、品种、生日、体重，一目了然。'
+
+[[params.features]]
+  icon = '💊'
+  title = '健康追踪'
+  desc = '疫苗、体检、用药、体重变化，完整记录，永不遗忘。'
+
+[[params.features]]
+  icon = '📝'
+  title = '日常日记'
+  desc = '随手记录毛孩子的趣事和心情，每个温暖瞬间都值得保存。'
+
+[[params.features]]
+  icon = '📊'
+  title = '数据可视化'
+  desc = '体重趋势、健康统计，用图表直观展示宠物的成长轨迹。'
+
+[[params.features]]
+  icon = '📱'
+  title = '响应式设计'
+  desc = '手机、平板、电脑，随时随地查看毛孩子的情况。'
+
+[[params.features]]
+  icon = '🗄️'
+  title = '本地优先'
+  desc = 'SQLite 数据库，数据完全由你掌控，无需云端服务。'
+
+[[params.techs]]
+  name = "Next.js 14"
+  url = "https://nextjs.org"
+
+[[params.techs]]
+  name = "TypeScript"
+  url = "https://www.typescriptlang.org"
+
+[[params.techs]]
+  name = "Prisma"
+  url = "https://www.prisma.io"
+
+[[params.techs]]
+  name = "SQLite"
+  url = "https://www.sqlite.org"
+
+[[params.techs]]
+  name = "Tailwind CSS"
+  url = "https://tailwindcss.com"
+
+[[params.techs]]
+  name = "Recharts"
+  url = "https://recharts.org"
+
+[[params.techs]]
+  name = "Lucide Icons"
+  url = "https://lucide.dev"
+
+[[params.team]]
+  name = "Michael Yao"
+  role = "开发者"
+  url = "https://github.com/windsonsea"

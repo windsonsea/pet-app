@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }}</title>
+  <meta name="description" content="{{ .Params.description }}">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <a href="/" class="logo">🐾 宠物管家</a>
+      <nav>
+        <a href="#features">功能</a>
+        <a href="#tech">技术栈</a>
+        <a href="#quickstart">快速开始</a>
+        <a href="{{ .Site.Params.repo }}" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  {{ block "main" . }}{{ end }}
+
+  <footer>
+    <div class="container">
+      <p>Made with ❤️ by <a href="{{ .Site.Params.repo }}">Pet Manager</a></p>
+    </div>
+  </footer>
+</body>
+</html>

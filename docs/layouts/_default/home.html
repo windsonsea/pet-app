@@ -1,0 +1,79 @@
+{{ define "main" }}
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>🐾 宠物管家</h1>
+    <p class="subtitle">{{ .Site.Params.description }}</p>
+    <p class="hero-desc">Add pets, log health records, jot down daily moments — all in one cozy place.</p>
+    <div class="hero-btns">
+      <a href="{{ .Site.Params.repo }}" class="btn btn-primary" target="_blank">⭐ GitHub 源码</a>
+      <a href="#features" class="btn btn-secondary">了解更多 ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="features">
+  <div class="container">
+    <h2>✨ 核心功能</h2>
+    <div class="feature-grid">
+      {{ range .Site.Params.features }}
+      <div class="feature-card">
+        <div class="feature-icon">{{ .icon }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section id="tech" class="tech">
+  <div class="container">
+    <h2>🛠️ 技术栈</h2>
+    <div class="tech-list">
+      {{ range .Site.Params.techs }}
+      <a href="{{ .url }}" class="tech-badge" target="_blank">{{ .name }}</a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Quick Start -->
+<section id="quickstart" class="quickstart">
+  <div class="container">
+    <h2>🚀 快速开始</h2>
+    <div class="code-block">
+      <pre><code># 克隆项目
+git clone https://github.com/windsonsea/pet-app.git
+cd pet-app
+
+# 安装依赖
+npm install
+
+# 填充示例数据
+npm run db:seed
+
+# 启动！
+npm run dev</code></pre>
+    </div>
+    <p class="hint">打开 <a href="http://localhost:3000">http://localhost:3000</a> 查看效果 🎉</p>
+  </div>
+</section>
+
+<!-- Team -->
+<section id="team" class="team">
+  <div class="container">
+    <h2>👤 关于</h2>
+    <div class="team-card">
+      {{ range .Site.Params.team }}
+      <a href="{{ .url }}" class="team-member" target="_blank">
+        <strong>{{ .name }}</strong>
+        <span>{{ .role }}</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
