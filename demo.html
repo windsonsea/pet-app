@@ -88,6 +88,7 @@
   </style>
 </head>
 <body>
+  <img id="dog" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=100" alt="dog" style="width:40px;height:40px;object-fit:cover;border-radius:8px;position:fixed;z-index:9999;">
   <img id="cat" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=100" alt="cat" style="width:40px;height:40px;object-fit:cover;border-radius:8px;">
   <div class="container">
     <div id="home-page">
@@ -311,6 +312,17 @@
     let y = Math.random() * (window.innerHeight - 50);
     let dx = 1 + Math.random() * 1;
     let dy = 1 + Math.random() * 1;
+    
+    // Dog
+    const dog = document.getElementById('dog');
+    let dogX = Math.random() * (window.innerWidth - 50);
+    let dogY = Math.random() * (window.innerHeight - 50);
+    let dogDx = 1 + Math.random() * 1;
+    let dogDy = 1 + Math.random() * 1;
+    let dogFacingRight = true;
+    
+    dog.style.left = dogX + 'px';
+    dog.style.top = dogY + 'px';
     let facingRight = true;
     
     cat.style.left = x + 'px';
@@ -319,6 +331,18 @@
     function moveCat() {
       x += dx;
       y += dy;
+      
+      // Check collision with dog
+      const dist = Math.sqrt((x - dogX) ** 2 + (y - dogY) ** 2);
+      if (dist < 50) {
+        // Both turn away
+        dx = (x < dogX) ? -Math.abs(dx) : Math.abs(dx);
+        dogDx = (dogX < x) ? -Math.abs(dogDx) : Math.abs(dogDx);
+        dy = -dy;
+        dogDy = -dogDy;
+        cat.classList.toggle('flip', dx > 0);
+        dog.classList.toggle('flip', dogDx > 0);
+      }
       
       if (x <= 0 || x >= window.innerWidth - 50) {
         dx = -dx;
@@ -334,6 +358,44 @@
       requestAnimationFrame(moveCat);
     }
     
+    function moveDog() {
+      dogX += dogDx;
+      dogY += dogDy;
+      
+      // Check collision with cat
+      const dist = Math.sqrt((x - dogX) ** 2 + (y - dogY) ** 2);
+      if (dist < 50) {
+        dx = (x < dogX) ? -Math.abs(dx) : Math.abs(dx);
+        dogDx = (dogX < x) ? -Math.abs(dogDx) : Math.abs(dogDx);
+        dy = -dy;
+        dogDy = -dogDy;
+        cat.classList.toggle('flip', dx > 0);
+        dog.classList.toggle('flip', dogDx > 0);
+      }
+      
+      if (dogX <= 0 || dogX >= window.innerWidth - 50) {
+        dogDx = -dogDx;
+        dogFacingRight = dogDx > 0;
+        dog.classList.toggle('flip', dogFacingRight);
+      }
+      if (dogY <= 0 || dogY >= window.innerHeight - 50) {
+        dogDy = -dogDy;
+      }
+      
+      dog.style.left = dogX + 'px';
+      dog.style.top = dogY + 'px';
+      requestAnimationFrame(moveDog);
+    }
+    
+    dog.addEventListener('click', () => {
+      dogDx = (Math.random() - 0.5) * 5;
+      dogDy = (Math.random() - 0.5) * 5;
+      if (Math.abs(dogDx) < 0.5) dogDx = dogDx > 0 ? 1 : -1;
+      if (Math.abs(dogDy) < 0.5) dogDy = dogDy > 0 ? 1 : -1;
+      dogFacingRight = dogDx > 0;
+      dog.classList.toggle('flip', dogFacingRight);
+    });
+    
     cat.addEventListener('click', () => {
       dx = (Math.random() - 0.5) * 5;
       dy = (Math.random() - 0.5) * 5;
@@ -344,6 +406,7 @@
     });
     
     moveCat();
+    moveDog();
 
     function showFeature(feature) {
       document.getElementById('home-page').classList.add('hidden');
