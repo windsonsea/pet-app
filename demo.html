@@ -4,26 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>爪爪 🦞 - 你的数字助手</title>
-  <script>
-    // 跳转映射
-    const featureLinks = {
-      'weather': 'https://windsonsea.github.io/pet-app/?feature=weather',
-      'calendar': 'https://windsonsea.github.io/pet-app/?feature=calendar',
-      'checkin': 'https://windsonsea.github.io/pet-app/?feature=checkin',
-      'memory': 'https://windsonsea.github.io/pet-app/?feature=memory',
-      'search': 'https://windsonsea.github.io/pet-app/?feature=search',
-      'automation': 'https://windsonsea.github.io/pet-app/?feature=automation'
-    };
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.feature').forEach(function(el) {
-        var key = el.getAttribute('data-feature');
-        if (key && featureLinks[key]) {
-          el.style.cursor = 'pointer';
-          el.onclick = function() { window.open(featureLinks[key], '_blank'); };
-        }
-      });
-    });
-  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -33,193 +13,241 @@
       color: #fff;
       line-height: 1.6;
     }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 60px 20px;
-    }
-    .hero {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .avatar {
-      font-size: 80px;
-      margin-bottom: 20px;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #00d9ff, #00ff88);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .tagline {
-      color: #8892b0;
-      font-size: 1.2rem;
-    }
-    .section {
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .section h2 {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-      color: #00d9ff;
-    }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .feature {
-      background: rgba(0,0,0,0.3);
-      padding: 20px;
-      border-radius: 12px;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-    .feature:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0,217,255,0.2);
-      background: rgba(0,217,255,0.1);
-    }
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    .feature-title {
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .feature-desc {
-      font-size: 0.9rem;
-      color: #8892b0;
-    }
-    .status {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-    .status-item {
-      text-align: center;
-    }
-    .status-value {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #00ff88;
-    }
-    .status-label {
-      font-size: 0.85rem;
-      color: #8892b0;
-    }
-    .cta {
-      text-align: center;
-      margin-top: 40px;
-    }
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(90deg, #00d9ff, #00ff88);
-      color: #1a1a2e;
-      padding: 14px 40px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(0,217,255,0.3);
-    }
-    .footer {
-      text-align: center;
-      margin-top: 60px;
-      color: #8892b0;
-      font-size: 0.9rem;
-    }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .hero { text-align: center; margin-bottom: 40px; }
+    .avatar { font-size: 60px; margin-bottom: 15px; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    h1 { font-size: 2rem; margin-bottom: 10px; background: linear-gradient(90deg, #00d9ff, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .tagline { color: #8892b0; font-size: 1rem; }
+    .section { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+    .section h2 { font-size: 1.2rem; margin-bottom: 16px; color: #00d9ff; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .feature { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; transition: transform 0.2s, box-shadow 0.2s, background 0.2s; cursor: pointer; }
+    .feature:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,217,255,0.2); background: rgba(0,217,255,0.1); }
+    .feature.active { background: rgba(0,217,255,0.2); border: 1px solid #00d9ff; }
+    .feature-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .feature-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+    .feature-desc { font-size: 0.75rem; color: #8892b0; }
+    .feature-content { display: none; }
+    .feature-content.active { display: block; }
+    .feature-detail { padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px; }
+    .feature-detail h3 { font-size: 1.3rem; margin-bottom: 15px; color: #00ff88; }
+    .feature-detail p { margin-bottom: 12px; color: #ccc; }
+    .feature-detail .status { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px; }
+    .feature-detail .status-item { text-align: center; }
+    .feature-detail .status-value { font-size: 1.2rem; font-weight: bold; color: #00ff88; }
+    .feature-detail .status-label { font-size: 0.75rem; color: #8892b0; }
+    .back-btn { display: inline-block; background: rgba(255,255,255,0.1); color: #00d9ff; padding: 8px 16px; border-radius: 20px; margin-bottom: 15px; cursor: pointer; font-size: 0.9rem; }
+    .back-btn:hover { background: rgba(0,217,255,0.2); }
+    .status-row { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 20px 0; }
+    .status-item { text-align: center; }
+    .status-value { font-size: 1.5rem; font-weight: bold; color: #00ff88; }
+    .status-label { font-size: 0.8rem; color: #8892b0; }
+    .cta { text-align: center; margin-top: 20px; }
+    .cta-button { display: inline-block; background: linear-gradient(90deg, #00d9ff, #00ff88); color: #1a1a2e; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; }
+    .footer { text-align: center; margin-top: 40px; color: #8892b0; font-size: 0.8rem; }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="hero">
-      <div class="avatar">🦞</div>
-      <h1>爪爪</h1>
-      <p class="tagline">你的数字助手 · 寄居在服务器里的虾兵蟹将</p>
+    <!-- 主页 -->
+    <div id="home-page">
+      <div class="hero">
+        <div class="avatar">🦞</div>
+        <h1>爪爪</h1>
+        <p class="tagline">你的数字助手 · 寄居在服务器里的虾兵蟹将</p>
+      </div>
+
+      <div class="section">
+        <h2>🎯 我能做什么（点击查看）</h2>
+        <div class="features">
+          <div class="feature" data-feature="weather" onclick="showFeature('weather')">
+            <div class="feature-icon">🌤️</div>
+            <div class="feature-title">天气播报</div>
+            <div class="feature-desc">每日 7:30 自动推送</div>
+          </div>
+          <div class="feature" data-feature="calendar" onclick="showFeature('calendar')">
+            <div class="feature-icon">📅</div>
+            <div class="feature-title">日程管理</div>
+            <div class="feature-desc">每天 8:00 询问安排</div>
+          </div>
+          <div class="feature" data-feature="checkin" onclick="showFeature('checkin')">
+            <div class="feature-icon">💪</div>
+            <div class="feature-title">打卡提醒</div>
+            <div class="feature-desc">每天 21:00 提醒</div>
+          </div>
+          <div class="feature" data-feature="memory" onclick="showFeature('memory')">
+            <div class="feature-icon">🧠</div>
+            <div class="feature-title">记忆助手</div>
+            <div class="feature-desc">记住重要的事情</div>
+          </div>
+          <div class="feature" data-feature="search" onclick="showFeature('search')">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-title">信息查询</div>
+            <div class="feature-desc">搜索、天气、网页</div>
+          </div>
+          <div class="feature" data-feature="automation" onclick="showFeature('automation')">
+            <div class="feature-icon">⚙️</div>
+            <div class="feature-title">自动化</div>
+            <div class="feature-desc">定时任务、批处理</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📊 当前状态</h2>
+        <div class="status-row">
+          <div class="status-item"><div class="status-value">🟢 在线</div><div class="status-label">服务状态</div></div>
+          <div class="status-item"><div class="status-value">4</div><div class="status-label">定时任务</div></div>
+          <div class="status-item"><div class="status-value">WebChat</div><div class="status-label">当前渠道</div></div>
+          <div class="status-item"><div class="status-value">2026.4.7</div><div class="status-label">版本</div></div>
+        </div>
+      </div>
+
+      <div class="cta">
+        <a href="http://10.233.102.182:10001/" class="cta-button">开始对话 →</a>
+      </div>
     </div>
 
-    <div class="section">
-      <h2>🎯 我能做什么</h2>
-      <div class="features">
-        <div class="feature" data-feature="weather">
-          <div class="feature-icon">🌤️</div>
-          <div class="feature-title">天气播报</div>
-          <div class="feature-desc">每日 7:30 自动推送天气</div>
-        </div>
-        <div class="feature" data-feature="calendar">
-          <div class="feature-icon">📅</div>
-          <div class="feature-title">日程管理</div>
-          <div class="feature-desc">每天 8:00 询问今日安排</div>
-        </div>
-        <div class="feature" data-feature="checkin">
-          <div class="feature-icon">💪</div>
-          <div class="feature-title">打卡提醒</div>
-          <div class="feature-desc">每天 21:00 打卡提醒</div>
-        </div>
-        <div class="feature" data-feature="memory">
-          <div class="feature-icon">🧠</div>
-          <div class="feature-title">记忆助手</div>
-          <div class="feature-desc">记住重要的事情</div>
-        </div>
-        <div class="feature" data-feature="search">
-          <div class="feature-icon">🔍</div>
-          <div class="feature-title">信息查询</div>
-          <div class="feature-desc">搜索、网页、天气</div>
-        </div>
-        <div class="feature" data-feature="automation">
-          <div class="feature-icon">⚙️</div>
-          <div class="feature-title">自动化</div>
-          <div class="feature-desc">定时任务、批量处理</div>
+    <!-- 天气播报详情 -->
+    <div id="feature-weather" class="feature-content">
+      <div class="back-btn" onclick="showHome()">← 返回</div>
+      <div class="section">
+        <h2>🌤️ 天气播报</h2>
+        <div class="feature-detail">
+          <h3>今日上海天气</h3>
+          <p>☀️ 晴天</p>
+          <p>🌡️ 温度: 24°C (体感 26°C)</p>
+          <p>💧 湿度: 55%</p>
+          <p>🌬️ 风力: 东南风 3级</p>
+          <p>⏰ 播报时间: 每天 7:30</p>
+          <div class="status">
+            <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
+            <div class="status-item"><div class="status-value">1</div><div class="status-label">关注城市</div></div>
+            <div class="status-item"><div class="status-value">每天</div><div class="status-label">频率</div></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <h2>📊 当前状态</h2>
-      <div class="status">
-        <div class="status-item">
-          <div class="status-value">在线</div>
-          <div class="status-label">服务状态</div>
-        </div>
-        <div class="status-item">
-          <div class="status-value">4</div>
-          <div class="status-label">定时任务</div>
-        </div>
-        <div class="status-item">
-          <div class="status-value">WebChat</div>
-          <div class="status-label">当前渠道</div>
-        </div>
-        <div class="status-item">
-          <div class="status-value">2026.4.7</div>
-          <div class="status-label">OpenClaw 版本</div>
+    <!-- 日程管理详情 -->
+    <div id="feature-calendar" class="feature-content">
+      <div class="back-btn" onclick="showHome()">← 返回</div>
+      <div class="section">
+        <h2>📅 日程管理</h2>
+        <div class="feature-detail">
+          <h3>今日安排</h3>
+          <p>暂无会议安排</p>
+          <p>⏰ 询问时间: 每天 8:00</p>
+          <div class="status">
+            <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
+            <div class="status-item"><div class="status-value">0</div><div class="status-label">今日事件</div></div>
+            <div class="status-item"><div class="status-value">每天</div><div class="status-label">询问频率</div></div>
+          </div>
+          <p style="margin-top: 15px; color: #8892b0;">💡 告诉爪爪你的日程，它会帮你记得并在会议前提醒</p>
         </div>
       </div>
     </div>
 
-    <div class="cta">
-      <a href="http://10.233.102.182:10001/" class="cta-button">开始对话 →</a>
+    <!-- 打卡提醒详情 -->
+    <div id="feature-checkin" class="feature-content">
+      <div class="back-btn" onclick="showHome()">← 返回</div>
+      <div class="section">
+        <h2>💪 打卡提醒</h2>
+        <div class="feature-detail">
+          <h3>健康打卡</h3>
+          <p>🔔 提醒时间: 每天 21:00</p>
+          <div class="status">
+            <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
+            <div class="status-item"><div class="status-value">21:00</div><div class="status-label">提醒时间</div></div>
+            <div class="status-item"><div class="status-value">每天</div><div class="status-label">频率</div></div>
+          </div>
+          <p style="margin-top: 15px; color: #8892b0;">💡 可以设置多种打卡：运动、喝水、读书、早睡等</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 记忆助手详情 -->
+    <div id="feature-memory" class="feature-content">
+      <div class="back-btn" onclick="showHome()">← 返回</div>
+      <div class="section">
+        <h2>🧠 记忆助手</h2>
+        <div class="feature-detail">
+          <h3>长期记忆</h3>
+          <p>爪爪会记住你告诉它的事情</p>
+          <p>📝 每周日 20:00 生成周总结</p>
+          <div class="status">
+            <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
+            <div class="status-item"><div class="status-value">1</div><div class="status-label">记忆文件</div></div>
+            <div class="status-item"><div class="status-value">每周</div><div class="status-label">总结频率</div></div>
+          </div>
+          <p style="margin-top: 15px; color: #8892b0;">💡 告诉爪爪"记住 XXX"，它就会一直记得</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 信息查询详情 -->
+    <div id="feature-search" class="feature-content">
+      <div class="back-btn" onclick="showHome()">← 返回</div>
+      <div class="section">
+        <h2>🔍 信息查询</h2>
+        <div class="feature-detail">
+          <h3>随时问我</h3>
+          <p>🌐 网页搜索、抓取</p>
+          <p>🌤️ 天气查询</p>
+          <p>📰 新闻资讯</p>
+          <p>💻 技术文档</p>
+          <div class="status">
+            <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
+            <div class="status-item"><div class="status-value">∞</div><div class="status-label">无限制</div></div>
+            <div class="status-item"><div class="status-value">按需</div><div class="status-label">调用方式</div></div>
+          </div>
+          <p style="margin-top: 15px; color: #8892b0;">💡 直接告诉我你想查什么就行</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自动化详情 -->
+    <div id="feature-automation" class="feature-content">
+      <div class="back-btn" onclick="showHome()">← 返回</div>
+      <div class="section">
+        <h2>⚙️ 自动化</h2>
+        <div class="feature-detail">
+          <h3>定时任务</h3>
+          <p>🤖 4 个定时任务正在运行</p>
+          <div class="status">
+            <div class="status-item"><div class="status-value">4</div><div class="status-label">任务数</div></div>
+            <div class="status-item"><div class="status-value">✅ 正常运行</div><div class="status-label">状态</div></div>
+            <div class="status-item"><div class="status-value">2026.4.7</div><div class="status-label">版本</div></div>
+          </div>
+          <p style="margin-top: 15px; color: #8892b0;">💡 可以添加更多自动化任务，如定时发邮件、执行脚本等</p>
+        </div>
+      </div>
     </div>
 
     <div class="footer">
       <p>Powered by OpenClaw · 自托管 AI 助手</p>
     </div>
   </div>
+
+  <script>
+    function showFeature(feature) {
+      document.getElementById('home-page').classList.add('hidden');
+      document.querySelectorAll('.feature-content').forEach(el => el.classList.remove('active'));
+      document.getElementById('feature-' + feature).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    function showHome() {
+      document.getElementById('home-page').classList.remove('hidden');
+      document.querySelectorAll('.feature-content').forEach(el => el.classList.remove('active'));
+    }
+    // 检查 URL 参数
+    const params = new URLSearchParams(window.location.search);
+    const feature = params.get('feature');
+    if (feature) {
+      showFeature(feature);
+    }
+  </script>
 </body>
 </html>
