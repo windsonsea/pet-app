@@ -71,8 +71,8 @@
       align-items: center;
     }
     #modal img {
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 80vw;
+      max-height: 80vh; object-fit: contain;
       border-radius: 8px;
     }
     #modal span {
@@ -351,7 +351,7 @@
     }
     
     function showModal(src) {
-      document.getElementById('modal-img').src = src.replace('w=200', 'w=400');
+      document.getElementById("modal-img").src = src; document.getElementById("modal-img").style.width = "auto"; document.getElementById("modal-img").style.height = "80vh".replace('w=200', 'w=400');
       document.getElementById('modal').style.display = 'flex';
     }
 
