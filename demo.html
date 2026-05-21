@@ -12,7 +12,17 @@
       min-height: 100vh;
       color: #fff;
       line-height: 1.6;
+      overflow-x: hidden;
     }
+    #cat {
+      position: fixed;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 9999;
+      transition: transform 0.1s;
+      user-select: none;
+    }
+    #cat.flip { transform: scaleX(-1); }
     .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
     .hero { text-align: center; margin-bottom: 40px; }
     .avatar { font-size: 60px; margin-bottom: 15px; animation: bounce 2s infinite; }
@@ -50,8 +60,8 @@
   </style>
 </head>
 <body>
+  <div id="cat">🐱</div>
   <div class="container">
-    <!-- 主页 -->
     <div id="home-page">
       <div class="hero">
         <div class="avatar">🦞</div>
@@ -110,7 +120,6 @@
       </div>
     </div>
 
-    <!-- 天气播报详情 -->
     <div id="feature-weather" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
@@ -131,7 +140,6 @@
       </div>
     </div>
 
-    <!-- 日程管理详情 -->
     <div id="feature-calendar" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
@@ -145,12 +153,10 @@
             <div class="status-item"><div class="status-value">0</div><div class="status-label">今日事件</div></div>
             <div class="status-item"><div class="status-value">每天</div><div class="status-label">询问频率</div></div>
           </div>
-          <p style="margin-top: 15px; color: #8892b0;">💡 告诉爪爪你的日程，它会帮你记得并在会议前提醒</p>
         </div>
       </div>
     </div>
 
-    <!-- 打卡提醒详情 -->
     <div id="feature-checkin" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
@@ -163,31 +169,26 @@
             <div class="status-item"><div class="status-value">21:00</div><div class="status-label">提醒时间</div></div>
             <div class="status-item"><div class="status-value">每天</div><div class="status-label">频率</div></div>
           </div>
-          <p style="margin-top: 15px; color: #8892b0;">💡 可以设置多种打卡：运动、喝水、读书、早睡等</p>
         </div>
       </div>
     </div>
 
-    <!-- 记忆助手详情 -->
     <div id="feature-memory" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
         <h2>🧠 记忆助手</h2>
         <div class="feature-detail">
           <h3>长期记忆</h3>
-          <p>爪爪会记住你告诉它的事情</p>
-          <p>📝 每周日 20:00 生成周总结</p>
+          <p>每周日 20:00 生成周总结</p>
           <div class="status">
             <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
             <div class="status-item"><div class="status-value">1</div><div class="status-label">记忆文件</div></div>
             <div class="status-item"><div class="status-value">每周</div><div class="status-label">总结频率</div></div>
           </div>
-          <p style="margin-top: 15px; color: #8892b0;">💡 告诉爪爪"记住 XXX"，它就会一直记得</p>
         </div>
       </div>
     </div>
 
-    <!-- 信息查询详情 -->
     <div id="feature-search" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
@@ -197,18 +198,14 @@
           <p>🌐 网页搜索、抓取</p>
           <p>🌤️ 天气查询</p>
           <p>📰 新闻资讯</p>
-          <p>💻 技术文档</p>
           <div class="status">
             <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
             <div class="status-item"><div class="status-value">∞</div><div class="status-label">无限制</div></div>
-            <div class="status-item"><div class="status-value">按需</div><div class="status-label">调用方式</div></div>
           </div>
-          <p style="margin-top: 15px; color: #8892b0;">💡 直接告诉我你想查什么就行</p>
         </div>
       </div>
     </div>
 
-    <!-- 自动化详情 -->
     <div id="feature-automation" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
@@ -219,9 +216,7 @@
           <div class="status">
             <div class="status-item"><div class="status-value">4</div><div class="status-label">任务数</div></div>
             <div class="status-item"><div class="status-value">✅ 正常运行</div><div class="status-label">状态</div></div>
-            <div class="status-item"><div class="status-value">2026.4.7</div><div class="status-label">版本</div></div>
           </div>
-          <p style="margin-top: 15px; color: #8892b0;">💡 可以添加更多自动化任务，如定时发邮件、执行脚本等</p>
         </div>
       </div>
     </div>
@@ -232,6 +227,45 @@
   </div>
 
   <script>
+    const cat = document.getElementById('cat');
+    let x = Math.random() * (window.innerWidth - 50);
+    let y = Math.random() * (window.innerHeight - 50);
+    let dx = 2 + Math.random() * 2;
+    let dy = 2 + Math.random() * 2;
+    let facingRight = true;
+    
+    cat.style.left = x + 'px';
+    cat.style.top = y + 'px';
+    
+    function moveCat() {
+      x += dx;
+      y += dy;
+      
+      if (x <= 0 || x >= window.innerWidth - 50) {
+        dx = -dx;
+        facingRight = dx > 0;
+        cat.classList.toggle('flip', facingRight);
+      }
+      if (y <= 0 || y >= window.innerHeight - 50) {
+        dy = -dy;
+      }
+      
+      cat.style.left = x + 'px';
+      cat.style.top = y + 'px';
+      requestAnimationFrame(moveCat);
+    }
+    
+    cat.addEventListener('click', () => {
+      dx = (Math.random() - 0.5) * 10;
+      dy = (Math.random() - 0.5) * 10;
+      if (Math.abs(dx) < 1) dx = dx > 0 ? 2 : -2;
+      if (Math.abs(dy) < 1) dy = dy > 0 ? 2 : -2;
+      facingRight = dx > 0;
+      cat.classList.toggle('flip', facingRight);
+    });
+    
+    moveCat();
+
     function showFeature(feature) {
       document.getElementById('home-page').classList.add('hidden');
       document.querySelectorAll('.feature-content').forEach(el => el.classList.remove('active'));
@@ -242,12 +276,9 @@
       document.getElementById('home-page').classList.remove('hidden');
       document.querySelectorAll('.feature-content').forEach(el => el.classList.remove('active'));
     }
-    // 检查 URL 参数
     const params = new URLSearchParams(window.location.search);
     const feature = params.get('feature');
-    if (feature) {
-      showFeature(feature);
-    }
+    if (feature) showFeature(feature);
   </script>
 </body>
 </html>
