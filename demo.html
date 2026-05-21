@@ -351,18 +351,10 @@
     }
     
     function showModal(src) {
-      // Replace thumbnail with larger version from repo
-      let largeSrc = src.replace('.jpg', '_800.jpg'); // Use high-res version
-      if (src.includes("raw.githubusercontent.com")) {
-        largeSrc = src.replace("/main/images/", "/main/images/");
-        // Try to use larger image if exists, otherwise same
-      }
-      document.getElementById("modal-img").src = largeSrc;
-      document.getElementById("modal-img").style.width = "auto";
-      document.getElementById("modal-img").style.maxWidth = "90%";
-      document.getElementById("modal-img").style.height = "auto";
-      document.getElementById("modal-img").style.maxHeight = "85vh";
-      document.getElementById('modal').style.display = 'flex';
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modal-img");
+      modalImg.src = src.includes("cat") ? src.replace(".jpg", "_800.jpg") : src;
+      modal.style.display = "flex";
     }
 
     function showHome() {
