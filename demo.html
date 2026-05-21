@@ -4,6 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>爪爪 🦞 - 你的数字助手</title>
+  <script>
+    // 跳转映射
+    const featureLinks = {
+      'weather': 'https://windsonsea.github.io/pet-app/?feature=weather',
+      'calendar': 'https://windsonsea.github.io/pet-app/?feature=calendar',
+      'checkin': 'https://windsonsea.github.io/pet-app/?feature=checkin',
+      'memory': 'https://windsonsea.github.io/pet-app/?feature=memory',
+      'search': 'https://windsonsea.github.io/pet-app/?feature=search',
+      'automation': 'https://windsonsea.github.io/pet-app/?feature=automation'
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.feature').forEach(function(el) {
+        var key = el.getAttribute('data-feature');
+        if (key && featureLinks[key]) {
+          el.style.cursor = 'pointer';
+          el.onclick = function() { window.open(featureLinks[key], '_blank'); };
+        }
+      });
+    });
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -65,10 +85,6 @@
       padding: 20px;
       border-radius: 12px;
       transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
-      color: inherit;
     }
     .feature:hover {
       transform: translateY(-4px);
@@ -142,36 +158,36 @@
     <div class="section">
       <h2>🎯 我能做什么</h2>
       <div class="features">
-        <a href="https://windsonsea.github.io/pet-app/docs/demo.html?feature=weather" class="feature" target="_blank">
+        <div class="feature" data-feature="weather">
           <div class="feature-icon">🌤️</div>
           <div class="feature-title">天气播报</div>
           <div class="feature-desc">每日 7:30 自动推送天气</div>
-        </a>
-        <a href="https://windsonsea.github.io/pet-app/docs/demo.html?feature=calendar" class="feature" target="_blank">
+        </div>
+        <div class="feature" data-feature="calendar">
           <div class="feature-icon">📅</div>
           <div class="feature-title">日程管理</div>
           <div class="feature-desc">每天 8:00 询问今日安排</div>
-        </a>
-        <a href="https://windsonsea.github.io/pet-app/docs/demo.html?feature=checkin" class="feature" target="_blank">
+        </div>
+        <div class="feature" data-feature="checkin">
           <div class="feature-icon">💪</div>
           <div class="feature-title">打卡提醒</div>
           <div class="feature-desc">每天 21:00 打卡提醒</div>
-        </a>
-        <a href="https://windsonsea.github.io/pet-app/docs/demo.html?feature=memory" class="feature" target="_blank">
+        </div>
+        <div class="feature" data-feature="memory">
           <div class="feature-icon">🧠</div>
           <div class="feature-title">记忆助手</div>
           <div class="feature-desc">记住重要的事情</div>
-        </a>
-        <a href="https://windsonsea.github.io/pet-app/docs/demo.html?feature=search" class="feature" target="_blank">
+        </div>
+        <div class="feature" data-feature="search">
           <div class="feature-icon">🔍</div>
           <div class="feature-title">信息查询</div>
           <div class="feature-desc">搜索、网页、天气</div>
-        </a>
-        <a href="https://windsonsea.github.io/pet-app/docs/demo.html?feature=automation" class="feature" target="_blank">
+        </div>
+        <div class="feature" data-feature="automation">
           <div class="feature-icon">⚙️</div>
           <div class="feature-title">自动化</div>
           <div class="feature-desc">定时任务、批量处理</div>
-        </a>
+        </div>
       </div>
     </div>
 
