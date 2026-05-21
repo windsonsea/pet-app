@@ -231,8 +231,8 @@
     const cat = document.getElementById('cat');
     let x = Math.random() * (window.innerWidth - 50);
     let y = Math.random() * (window.innerHeight - 50);
-    let dx = 2 + Math.random() * 2;
-    let dy = 2 + Math.random() * 2;
+    let dx = 1 + Math.random() * 1;
+    let dy = 1 + Math.random() * 1;
     let facingRight = true;
     
     cat.style.left = x + 'px';
@@ -257,10 +257,10 @@
     }
     
     cat.addEventListener('click', () => {
-      dx = (Math.random() - 0.5) * 10;
-      dy = (Math.random() - 0.5) * 10;
-      if (Math.abs(dx) < 1) dx = dx > 0 ? 2 : -2;
-      if (Math.abs(dy) < 1) dy = dy > 0 ? 2 : -2;
+      dx = (Math.random() - 0.5) * 5;
+      dy = (Math.random() - 0.5) * 5;
+      if (Math.abs(dx) < 0.5) dx = dx > 0 ? 1 : -1;
+      if (Math.abs(dy) < 0.5) dy = dy > 0 ? 1 : -1;
       facingRight = dx > 0;
       cat.classList.toggle('flip', facingRight);
     });
