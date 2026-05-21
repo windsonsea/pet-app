@@ -120,10 +120,10 @@
             <div class="feature-title">记忆助手</div>
             <div class="feature-desc">记住重要的事情</div>
           </div>
-          <div class="feature" data-feature="search" onclick="showFeature('search')">
-            <div class="feature-icon">🔍</div>
-            <div class="feature-title">信息查询</div>
-            <div class="feature-desc">搜索、天气、网页</div>
+          <div class="feature" data-feature="beauty" onclick="showFeature('beauty')">
+            <div class="feature-icon">👩</div>
+            <div class="feature-title">美女相册</div>
+            <div class="feature-desc">精选美女照片</div>
           </div>
           <div class="feature" data-feature="automation" onclick="showFeature('automation')">
             <div class="feature-icon">⚙️</div>
@@ -227,18 +227,18 @@
       </div>
     </div>
 
-    <div id="feature-search" class="feature-content">
+    <div id="feature-beauty" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
-        <h2>🔍 信息查询</h2>
+        <h2>👩 美女相册</h2>
         <div class="feature-detail">
-          <h3>随时问我</h3>
-          <p>🌐 网页搜索、抓取</p>
-          <p>🌤️ 天气查询</p>
-          <p>📰 新闻资讯</p>
-          <div class="status">
-            <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
-            <div class="status-item"><div class="status-value">∞</div><div class="status-label">无限制</div></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty1.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty2.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty3.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty4.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty5.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty6.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
           </div>
         </div>
       </div>
