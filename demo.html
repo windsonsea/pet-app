@@ -125,10 +125,10 @@
             <div class="feature-title">美女相册</div>
             <div class="feature-desc">精选美女照片</div>
           </div>
-          <div class="feature" data-feature="automation" onclick="showFeature('automation')">
-            <div class="feature-icon">⚙️</div>
-            <div class="feature-title">自动化</div>
-            <div class="feature-desc">定时任务、批处理</div>
+          <div class="feature" data-feature="bird" onclick="showFeature('bird')">
+            <div class="feature-icon">🐦</div>
+            <div class="feature-title">鸟类相册</div>
+            <div class="feature-desc">最美鸟类照片</div>
           </div>
           <div class="feature" data-feature="album" onclick="showFeature('album')">
             <div class="feature-icon">📸</div>
@@ -244,16 +244,18 @@
       </div>
     </div>
 
-    <div id="feature-automation" class="feature-content">
+    <div id="feature-bird" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
-        <h2>⚙️ 自动化</h2>
+        <h2>🐦 鸟类相册</h2>
         <div class="feature-detail">
-          <h3>定时任务</h3>
-          <p>🤖 4 个定时任务正在运行</p>
-          <div class="status">
-            <div class="status-item"><div class="status-value">4</div><div class="status-label">任务数</div></div>
-            <div class="status-item"><div class="status-value">✅ 正常运行</div><div class="status-label">状态</div></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird1.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird2.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird3.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird4.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird5.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird6.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
           </div>
         </div>
       </div>
@@ -353,7 +355,7 @@
     function showModal(src) {
       const modal = document.getElementById("modal");
       const modalImg = document.getElementById("modal-img");
-      modalImg.src = src.includes("cat") || src.includes("dog") || src.includes("beauty") ? src.replace(".jpg", "_800.jpg") : src;
+      modalImg.src = src.includes("cat") || src.includes("dog") || src.includes("beauty") || src.includes("bird") ? src.replace(".jpg", "_800.jpg") : src;
       modal.style.display = "flex";
     }
 
