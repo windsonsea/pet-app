@@ -353,7 +353,7 @@
     function showModal(src) {
       const modal = document.getElementById("modal");
       const modalImg = document.getElementById("modal-img");
-      modalImg.src = src.includes("cat") ? src.replace(".jpg", "_800.jpg") : src;
+      modalImg.src = src.includes("cat") || src.includes("dog") ? src.replace(".jpg", "_800.jpg") : src;
       modal.style.display = "flex";
     }
 
