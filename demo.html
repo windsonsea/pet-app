@@ -355,7 +355,12 @@
     function showModal(src) {
       const modal = document.getElementById("modal");
       const modalImg = document.getElementById("modal-img");
-      modalImg.src = src.includes("cat") || src.includes("dog") ? src.replace(".jpg", "_800.jpg") : src;
+      // Use _800 for cat/dog only, others use same src
+      let displaySrc = src;
+      if (src.includes("cat") || src.includes("dog")) {
+        displaySrc = src.replace(".jpg", "_800.jpg");
+      }
+      modalImg.src = displaySrc;
       modal.style.display = "flex";
     }
 
