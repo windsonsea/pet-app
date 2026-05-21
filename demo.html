@@ -352,7 +352,7 @@
     
     function showModal(src) {
       // Replace thumbnail with larger version from repo
-      let largeSrc = src;
+      let largeSrc = src.replace('.jpg', '_800.jpg'); // Use high-res version
       if (src.includes("raw.githubusercontent.com")) {
         largeSrc = src.replace("/main/images/", "/main/images/");
         // Try to use larger image if exists, otherwise same
