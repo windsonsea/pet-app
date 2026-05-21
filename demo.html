@@ -351,7 +351,10 @@
     }
     
     function showModal(src) {
-      document.getElementById("modal-img").src = src; document.getElementById("modal-img").style.width = "auto"; document.getElementById("modal-img").style.maxWidth = "90%"; document.getElementById("modal-img").style.height = "80vh"; 
+      document.getElementById("modal-img").src = src.replace("raw.githubusercontent.com/windsonsea/pet-app/main/images/cat1.jpg", "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800").replace("raw.githubusercontent.com","raw.githubusercontent.com");
+      document.getElementById("modal-img").style.width = "auto";
+      document.getElementById("modal-img").style.maxWidth = "90%";
+      document.getElementById("modal-img").style.height = "80vh";
       document.getElementById('modal').style.display = 'flex';
     }
 
