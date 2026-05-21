@@ -57,6 +57,33 @@
     .cta { text-align: center; margin-top: 20px; }
     .cta-button { display: inline-block; background: linear-gradient(90deg, #00d9ff, #00ff88); color: #1a1a2e; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; }
     .footer { text-align: center; margin-top: 40px; color: #8892b0; font-size: 0.8rem; }
+
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+    #modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    #modal span {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
     .hidden { display: none !important; }
   </style>
 </head>
@@ -227,19 +254,40 @@
       </div>
     </div>
 
-    <div id="feature-album" class="feature-content">
+        <div id="feature-album" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
         <h2>📸 猫咪相册</h2>
         <div class="feature-detail">
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=150" style="width:100%;border-radius:8px;">
-            <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=150" style="width:100%;border-radius:8px;">
-            <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=150" style="width:100%;border-radius:8px;">
-            <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=150" style="width:100%;border-radius:8px;">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1612439600966-48c9954892ae?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1533743983669-94fa5b43358f?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1598902108854-10e335adac99?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1494256997604-0e10e9d72325?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
+            <img src="https://images.unsplash.com/photo-1516724562728-afc824a36e84?w=400" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)">
           </div>
         </div>
       </div>
+    </div>
+
+    <div id="modal" onclick="this.style.display='none'">
+      <span>&times;</span>
+      <img id="modal-img">
     </div>
 
     <div class="footer">
@@ -293,6 +341,12 @@
       document.getElementById('feature-' + feature).classList.add('active');
       window.scrollTo(0, 0);
     }
+    
+    function showModal(src) {
+      document.getElementById('modal-img').src = src.replace('w=400', 'w=800');
+      document.getElementById('modal').style.display = 'flex';
+    }
+
     function showHome() {
       document.getElementById('home-page').classList.remove('hidden');
       document.querySelectorAll('.feature-content').forEach(el => el.classList.remove('active'));
