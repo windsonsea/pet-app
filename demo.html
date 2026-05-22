@@ -201,9 +201,11 @@
         <h2>💪 打卡提醒</h2>
         <div class="feature-detail">
           <h3>健康打卡</h3>
-          <p>🔔 提醒时间: 每天 21:00</p>
+          <div id="checkin-status">
+            <p>⏰ 加载中...</p>
+          </div>
           <div class="status">
-            <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
+            <div class="status-item"><div class="status-value" id="checkin-toggle">⏳ 加载中</div><div class="status-label">今日状态</div></div>
             <div class="status-item"><div class="status-value">21:00</div><div class="status-label">提醒时间</div></div>
             <div class="status-item"><div class="status-value">每天</div><div class="status-label">频率</div></div>
           </div>
@@ -461,6 +463,36 @@
       }
     }
     fetchWeather();
+
+    // 打卡功能
+    async function fetchCheckin() {
+      try {
+        const res = await fetch('/api/checkin');
+        const data = await res.json();
+        const today = new Date().toISOString().split('T')[0];
+        const healthCheckin = data.find(c => c.type === 'health');
+        const isChecked = healthCheckin && healthCheckin.completed;
+        
+        const btn = document.getElementById('checkin-toggle');
+        btn.innerHTML = isChecked ? '✅ 已打卡' : '⏳ 点击打卡';
+        btn.style.cursor = 'pointer';
+        btn.onclick = async () => {
+          btn.innerHTML = '⏳ 处理中...';
+          await fetch('/api/checkin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'health', completed: !isChecked })
+          });
+          fetchCheckin();
+        };
+        
+        document.getElementById('checkin-status').innerHTML = 
+          isChecked ? '<p>✅ 今日已完成健康打卡！</p><p>' + (healthCheckin.note || '') + '</p>' : '<p>🔔 提醒时间: 每天 21:00</p>';
+      } catch (e) {
+        document.getElementById('checkin-toggle').innerHTML = '❌ 加载失败';
+      }
+    }
+    fetchCheckin();
   </script>
 </body>
 </html>

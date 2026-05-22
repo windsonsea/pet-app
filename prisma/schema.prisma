@@ -44,3 +44,12 @@ model DailyNote {
   imageUrl  String?
   createdAt DateTime @default(now())
 }
+
+model Checkin {
+  id        String   @id @default(cuid())
+  type      String   // health, habit, custom
+  date      String   // ISO date (YYYY-MM-DD)
+  completed Boolean  @default(false)
+  note      String?
+  createdAt DateTime @default(now())
+}
