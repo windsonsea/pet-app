@@ -165,10 +165,9 @@
         <h2>🌤️ 天气播报</h2>
         <div class="feature-detail">
           <h3>今日上海天气</h3>
-          <p>☀️ 晴天</p>
-          <p>🌡️ 温度: 24°C (体感 26°C)</p>
-          <p>💧 湿度: 55%</p>
-          <p>🌬️ 风力: 东南风 3级</p>
+          <div id="weather-content">
+            <p>⏰ 正在获取天气...</p>
+          </div>
           <p>⏰ 播报时间: 每天 7:30</p>
           <div class="status">
             <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
@@ -434,6 +433,34 @@
     const params = new URLSearchParams(window.location.search);
     const feature = params.get('feature');
     if (feature) showFeature(feature);
+
+    // 动态获取天气
+    async function fetchWeather() {
+      try {
+        const res = await fetch('https://wttr.in/Shanghai?format=j1');
+        const data = await res.json();
+        const c = data.current_condition[0];
+        const temp = c.temp_C;
+        const feelsLike = c.FeelsLikeC;
+        const humidity = c.humidity;
+        const wind = c.windspeedKM + 'km/h';
+        const weatherDesc = c.weatherDesc[0].value;
+        const iconMap = {
+          'Sunny': '☀️', 'Partly cloudy': '⛅', 'Cloudy': '☁️',
+          'Overcast': '🌥️', 'Mist': '🌫️', 'Rain': '🌧️',
+          'Thunderstorm': '⛈️', 'Snow': '❄️'
+        };
+        const icon = iconMap[weatherDesc] || '🌤️';
+        document.getElementById('weather-content').innerHTML =
+          '<p>' + icon + ' ' + weatherDesc + '</p>' +
+          '<p>🌡️ 温度: ' + temp + '°C (体感 ' + feelsLike + '°C)</p>' +
+          '<p>💧 湿度: ' + humidity + '%</p>' +
+          '<p>🌬️ 风力: ' + wind + '</p>';
+      } catch (e) {
+        document.getElementById('weather-content').innerHTML = '<p>❌ 获取天气失败</p>';
+      }
+    }
+    fetchWeather();
   </script>
 </body>
 </html>
