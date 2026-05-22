@@ -464,33 +464,35 @@
     }
     fetchWeather();
 
-    // 打卡功能
-    async function fetchCheckin() {
-      try {
-        const res = await fetch('/api/checkin');
-        const data = await res.json();
-        const today = new Date().toISOString().split('T')[0];
-        const healthCheckin = data.find(c => c.type === 'health');
-        const isChecked = healthCheckin && healthCheckin.completed;
-        
-        const btn = document.getElementById('checkin-toggle');
-        btn.innerHTML = isChecked ? '✅ 已打卡' : '⏳ 点击打卡';
-        btn.style.cursor = 'pointer';
-        btn.onclick = async () => {
-          btn.innerHTML = '⏳ 处理中...';
-          await fetch('/api/checkin', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type: 'health', completed: !isChecked })
-          });
-          fetchCheckin();
-        };
-        
-        document.getElementById('checkin-status').innerHTML = 
-          isChecked ? '<p>✅ 今日已完成健康打卡！</p><p>' + (healthCheckin.note || '') + '</p>' : '<p>🔔 提醒时间: 每天 21:00</p>';
-      } catch (e) {
-        document.getElementById('checkin-toggle').innerHTML = '❌ 加载失败';
-      }
+    // 打卡功能 (localStorage)
+    const CHECKIN_KEY = 'pet-app-checkins';
+    
+    function getCheckins() {
+      const data = localStorage.getItem(CHECKIN_KEY);
+      return data ? JSON.parse(data) : {};
+    }
+    
+    function saveCheckins(checkins) {
+      localStorage.setItem(CHECKIN_KEY, JSON.stringify(checkins));
+    }
+    
+    function fetchCheckin() {
+      const today = new Date().toISOString().split('T')[0];
+      const checkins = getCheckins();
+      const isChecked = checkins[today] === true;
+      
+      const btn = document.getElementById('checkin-toggle');
+      btn.innerHTML = isChecked ? '✅ 已打卡' : '⏳ 点击打卡';
+      btn.style.cursor = 'pointer';
+      btn.onclick = () => {
+        const newState = !isChecked;
+        checkins[today] = newState;
+        saveCheckins(checkins);
+        fetchCheckin();
+      };
+      
+      document.getElementById('checkin-status').innerHTML = 
+        isChecked ? '<p>✅ 今日已完成健康打卡！</p>' : '<p>🔔 提醒时间: 每天 21:00</p>';
     }
     fetchCheckin();
   </script>
