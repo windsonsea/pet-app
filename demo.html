@@ -143,25 +143,10 @@
             <div class="feature-title">人口统计</div>
             <div class="feature-desc">世界人口实时数据</div>
           </div>
-          <div class="feature" data-feature="beauty" onclick="showFeature('beauty')">
-            <div class="feature-icon">👩</div>
-            <div class="feature-title">美女相册</div>
-            <div class="feature-desc">精选美女照片</div>
-          </div>
-          <div class="feature" data-feature="bird" onclick="showFeature('bird')">
-            <div class="feature-icon">🐦</div>
-            <div class="feature-title">鸟类相册</div>
-            <div class="feature-desc">最美鸟类照片</div>
-          </div>
           <div class="feature" data-feature="album" onclick="showFeature('album')">
             <div class="feature-icon">📸</div>
-            <div class="feature-title">猫咪相册</div>
-            <div class="feature-desc">布布的生活照</div>
-          </div>
-          <div class="feature" data-feature="dog" onclick="showFeature('dog')">
-            <div class="feature-icon">🐕</div>
-            <div class="feature-title">狗狗相册</div>
-            <div class="feature-desc">萌犬生活照</div>
+            <div class="feature-title">相册</div>
+            <div class="feature-desc">美女/猫咪/狗狗/鸟类</div>
           </div>
           <div class="feature" data-feature="calendar" onclick="showFeature('calendar')">
             <div class="feature-icon">📅</div>
@@ -282,70 +267,30 @@
       </div>
     </div>
 
-    <div id="feature-beauty" class="feature-content">
+    <div id="feature-album" class="feature-content">
       <div class="back-btn" onclick="showHome()">← 返回</div>
       <div class="section">
-        <h2>👩 美女相册</h2>
+        <h2>📸 相册</h2>
         <div class="feature-detail">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty1.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty2.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty3.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty4.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty5.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/beauty6.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
+          <div class="features" style="grid-template-columns:repeat(2,1fr);">
+            <div class="feature" onclick="showAlbum('beauty')">
+              <div class="feature-icon">👩</div>
+              <div class="feature-title">美女</div>
+            </div>
+            <div class="feature" onclick="showAlbum('cat')">
+              <div class="feature-icon">🐱</div>
+              <div class="feature-title">猫咪</div>
+            </div>
+            <div class="feature" onclick="showAlbum('dog')">
+              <div class="feature-icon">🐕</div>
+              <div class="feature-title">狗狗</div>
+            </div>
+            <div class="feature" onclick="showAlbum('bird')">
+              <div class="feature-icon">🐦</div>
+              <div class="feature-title">鸟类</div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="feature-bird" class="feature-content">
-      <div class="back-btn" onclick="showHome()">← 返回</div>
-      <div class="section">
-        <h2>🐦 鸟类相册</h2>
-        <div class="feature-detail">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird1.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird2.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird3.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird4.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird5.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/bird6.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-
-        <div id="feature-album" class="feature-content">
-      <div class="back-btn" onclick="showHome()">← 返回</div>
-      <div class="section">
-        <h2>📸 猫咪相册</h2>
-        <div class="feature-detail">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/cat1.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/cat2.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/cat3.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/cat4.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/cat5.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/cat6.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="feature-dog" class="feature-content">
-      <div class="back-btn" onclick="showHome()">← 返回</div>
-      <div class="section">
-        <h2>🐕 狗狗相册</h2>
-        <div class="feature-detail">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/dog1.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/dog2.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/dog3.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/dog4.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/dog5.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-            <img src="https://raw.githubusercontent.com/windsonsea/pet-app/main/images/dog6.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">
-          </div>
+          <div id="album-images" style="margin-top:20px;display:none;"></div>
         </div>
       </div>
     </div>
@@ -798,6 +743,28 @@
           createFirework(x, y, color);
         }, i * 50);
       }
+    }
+    
+    // 相册子分类
+    function showAlbum(type) {
+      const imgs = document.getElementById('album-images');
+      imgs.style.display = 'grid';
+      imgs.style.gridTemplateColumns = 'repeat(3,1fr)';
+      imgs.style.gap = '8px';
+      
+      const base = 'https://raw.githubusercontent.com/windsonsea/pet-app/main/images/';
+      const maps = {
+        beauty: { prefix: 'beauty', count: 6, title: '👩 美女' },
+        cat: { prefix: 'cat', count: 6, title: '🐱 猫咪' },
+        dog: { prefix: 'dog', count: 6, title: '🐕 狗狗' },
+        bird: { prefix: 'bird', count: 6, title: '🐦 鸟类' }
+      };
+      const m = maps[type];
+      let html = '<p style="margin-bottom:10px;">' + m.title + '</p>';
+      for (let i = 1; i <= m.count; i++) {
+        html += '<img src="' + base + m.prefix + i + '.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">';
+      }
+      imgs.innerHTML = html;
     }
   </script>
 </body>
