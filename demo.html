@@ -817,16 +817,20 @@
       document.getElementById('forum-author').value = getAuthor();
       const posts = getPosts();
       const container = document.getElementById('forum-posts');
+      const currentAuthor = getAuthor();
       if (posts.length === 0) {
         container.innerHTML = '<p style="color:#8892b0;text-align:center;">还没有帖子，快来发第一条吧！</p>';
         return;
       }
       let html = '';
       posts.reverse().forEach((post, i) => {
+        const isMine = post.author === currentAuthor;
+        const buttons = isMine ? '<span onclick="editPost(' + i + ')" style="cursor:pointer;color:#00d9ff;margin-right:10px;">✏️ 编辑</span><span onclick="deletePost(' + i + ')" style="cursor:pointer;color:#ff6b6b;">🗑️ 删除</span>' : '';
         html += '<div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;margin-bottom:10px;">' +
           '<p style="font-size:0.85rem;color:#00d9ff;margin-bottom:5px;">👤 ' + post.author + '</p>' +
-          '<p style="margin-bottom:5px;">' + post.text + '</p>' +
+          '<p style="margin-bottom:5px;" id="post-text-' + i + '">' + post.text + '</p>' +
           '<p style="font-size:0.75rem;color:#8892b0;">' + post.time + '</p>' +
+          (buttons ? '<div style="margin-top:8px;">' + buttons + '</div>' : '') +
           '</div>';
       });
       container.innerHTML = html;
@@ -846,6 +850,26 @@
       });
       savePosts(posts);
       input.value = '';
+      renderPosts();
+    }
+    function deletePost(idx) {
+      if (!confirm('确定删除这条帖子？')) return;
+      const posts = getPosts();
+      posts.reverse();
+      posts.splice(idx, 1);
+      posts.reverse();
+      savePosts(posts);
+      renderPosts();
+    }
+    function editPost(idx) {
+      const posts = getPosts();
+      posts.reverse();
+      const post = posts[idx];
+      const newText = prompt('编辑帖子：', post.text);
+      if (newText === null || newText.trim() === '') return;
+      post.text = newText.trim();
+      posts.reverse();
+      savePosts(posts);
       renderPosts();
     }
     renderPosts();
