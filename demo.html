@@ -148,6 +148,11 @@
             <div class="feature-title">日程管理</div>
             <div class="feature-desc">每天 8:00 询问安排</div>
           </div>
+          <div class="feature" data-feature="population" onclick="showFeature('population')">
+            <div class="feature-icon">🌍</div>
+            <div class="feature-title">人口统计</div>
+            <div class="feature-desc">世界人口实时数据</div>
+          </div>
           <div class="feature" data-feature="memory" onclick="showFeature('memory')">
             <div class="feature-icon">🧠</div>
             <div class="feature-title">记忆助手</div>
@@ -245,6 +250,18 @@
             <div class="status-item"><div class="status-value">✅ 已启用</div><div class="status-label">状态</div></div>
             <div class="status-item"><div class="status-value">1</div><div class="status-label">记忆文件</div></div>
             <div class="status-item"><div class="status-value">每周</div><div class="status-label">总结频率</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="feature-population" class="feature-content">
+      <div class="back-btn" onclick="showHome()">← 返回</div>
+      <div class="section">
+        <h2>🌍 世界人口统计</h2>
+        <div class="feature-detail">
+          <div id="population-content">
+            <p>⏰ 加载中...</p>
           </div>
         </div>
       </div>
@@ -539,6 +556,31 @@
       setCity(city);
       fetchWeather();
     }
+
+    // 世界人口统计
+    function fetchPopulation() {
+      // 基于真实数据的模拟数据
+      const basePop = 8130000000;
+      const now = new Date();
+      const seconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+      const todayBirths = Math.floor(seconds * 4.2); // 每秒约4.2个新生儿
+      const todayDeaths = Math.floor(seconds * 1.8); // 每秒约1.8个死亡
+      const totalPop = basePop + todayBirths - todayDeaths;
+      
+      const malePop = Math.floor(totalPop * 0.503);
+      const femalePop = totalPop - malePop;
+      
+      const formatNum = (n) => n.toLocaleString();
+      
+      document.getElementById('population-content').innerHTML =
+        '<p style="font-size:1.3rem;color:#00ff88;">🌍 ' + formatNum(totalPop) + '</p>' +
+        '<p>👶 今日出生: ' + formatNum(births) + '</p>' +
+        '<p>⚰️ 今日死亡: ' + formatNum(todayDeaths) + '</p>' +
+        '<p>👨 男性: ' + formatNum(malePop) + '</p>' +
+        '<p>👩 女性: ' + formatNum(femalePop) + '</p>' +
+        '<p style="font-size:0.8rem;color:#8892b0;margin-top:10px;">* 数据基于世界人口时钟估算</p>';
+    }
+    fetchPopulation();
 
     // 打卡功能 (localStorage)
     const CHECKIN_KEY = 'pet-app-checkins';
