@@ -72,7 +72,7 @@ export default async function PetDetailPage({ params }: { params: { id: string }
             {pet.dailyNotes.map(n => (
               <div key={n.id} className="p-4 bg-stone-50 rounded-xl">
                 <div className="flex items-center gap-2 mb-1">
-                  <span>{{ happy: '😊', sad: '😢', neutral: '😐' }[n.mood] || '📝'}</span>
+                  <span>{{ happy: '😊', sad: '😢', neutral: '😐' }[n.mood || ''] || '📝'}</span>
                   <span className="text-xs text-stone-400">{new Date(n.createdAt).toLocaleDateString('zh-CN')}</span>
                 </div>
                 <p className="text-sm text-stone-700">{n.content}</p>
