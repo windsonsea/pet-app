@@ -53,3 +53,12 @@ model Checkin {
   note      String?
   createdAt DateTime @default(now())
 }
+
+model ForumPost {
+  id        String   @id @default(cuid())
+  author    String
+  text      String
+  time      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
