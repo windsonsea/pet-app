@@ -796,93 +796,80 @@
       document.querySelector('#feature-album .features').style.display = 'grid';
     }
     
-    // 小论坛功能（后端 API）
+    // 小论坛功能（localStorage）
+    const FORUM_KEY = 'pet-app-forum';
     const AUTHOR_KEY = 'pet-app-author';
-    const API_BASE = '/api/forum';
+    function getPosts() {
+      const data = localStorage.getItem(FORUM_KEY);
+      return data ? JSON.parse(data) : [];
+    }
+    function savePosts(posts) {
+      localStorage.setItem(FORUM_KEY, JSON.stringify(posts));
+    }
     function getAuthor() {
       return localStorage.getItem(AUTHOR_KEY) || '匿名';
     }
     function setAuthor(name) {
       localStorage.setItem(AUTHOR_KEY, name);
     }
-    async function renderPosts() {
+    function renderPosts() {
       document.getElementById('forum-author').value = getAuthor();
-      try {
-        const res = await fetch(API_BASE);
-        const posts = await res.json();
-        const container = document.getElementById('forum-posts');
-        const currentAuthor = getAuthor();
-        if (posts.length === 0) {
-          container.innerHTML = '<p style="color:#8892b0;text-align:center;">还没有帖子，快来发第一条吧！</p>';
-          return;
-        }
-        let html = '';
-        posts.forEach((post) => {
-          const isMine = post.author === currentAuthor;
-          const buttons = isMine ? '<span onclick="editPost(\'' + post.id + '\')\" style="cursor:pointer;color:#00d9ff;margin-right:10px;">✏️ 编辑</span><span onclick="deletePost(\'' + post.id + '\')\" style="cursor:pointer;color:#ff6b6b;">🗑️ 删除</span>' : '';
-          html += '<div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;margin-bottom:10px;">' +
-            '<p style="font-size:0.85rem;color:#00d9ff;margin-bottom:5px;">👤 ' + post.author + '</p>' +
-            '<p style="margin-bottom:5px;">' + post.text + '</p>' +
-            '<p style="font-size:0.75rem;color:#8892b0;">' + post.time + '</p>' +
-            (buttons ? '<div style="margin-top:8px;">' + buttons + '</div>' : '') +
-            '</div>';
-        });
-        container.innerHTML = html;
-      } catch (e) {
-        document.getElementById('forum-posts').innerHTML = '<p style="color:#ff6b6b;">加载失败，请稍后重试</p>';
+      const posts = getPosts();
+      const container = document.getElementById('forum-posts');
+      const currentAuthor = getAuthor();
+      if (posts.length === 0) {
+        container.innerHTML = '<p style="color:#8892b0;text-align:center;">还没有帖子，快来发第一条吧！</p>';
+        return;
       }
+      let html = '';
+      posts.reverse().forEach((post, i) => {
+        const isMine = post.author === currentAuthor;
+        const buttons = isMine ? '<span onclick="editPost(' + i + ')" style="cursor:pointer;color:#00d9ff;margin-right:10px;">✏️ 编辑</span><span onclick="deletePost(' + i + ')" style="cursor:pointer;color:#ff6b6b;">🗑️ 删除</span>' : '';
+        html += '<div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;margin-bottom:10px;">' +
+          '<p style="font-size:0.85rem;color:#00d9ff;margin-bottom:5px;">👤 ' + post.author + '</p>' +
+          '<p style="margin-bottom:5px;">' + post.text + '</p>' +
+          '<p style="font-size:0.75rem;color:#8892b0;">' + post.time + '</p>' +
+          (buttons ? '<div style="margin-top:8px;">' + buttons + '</div>' : '') +
+          '</div>';
+      });
+      container.innerHTML = html;
     }
-    async function addPost() {
+    function addPost() {
       const input = document.getElementById('forum-input');
       const authorInput = document.getElementById('forum-author');
       const text = input.value.trim();
       if (!text) return;
       const author = authorInput.value.trim() || '匿名';
       setAuthor(author);
-      try {
-        await fetch(API_BASE, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ author, text, time: new Date().toLocaleString('zh-CN') })
-        });
-        input.value = '';
-        renderPosts();
-      } catch (e) {
-        alert('发布失败');
-      }
+      const posts = getPosts();
+      posts.push({
+        author: author,
+        text: text,
+        time: new Date().toLocaleString('zh-CN')
+      });
+      savePosts(posts);
+      input.value = '';
+      renderPosts();
     }
-    async function deletePost(id) {
+    function deletePost(idx) {
       if (!confirm('确定删除这条帖子？')) return;
-      try {
-        await fetch(API_BASE, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id })
-        });
-        renderPosts();
-      } catch (e) {
-        alert('删除失败');
-      }
+      const posts = getPosts();
+      posts.reverse();
+      posts.splice(idx, 1);
+      posts.reverse();
+      savePosts(posts);
+      renderPosts();
     }
-    async function editPost(id) {
-      const posts = document.querySelectorAll('#forum-posts > div');
-      let currentText = '';
-      const res = await fetch(API_BASE);
-      const allPosts = await res.json();
-      const post = allPosts.find(p => p.id === id);
-      if (!post) return;
+    function editPost(idx) {
+      const posts = getPosts();
+      posts.reverse();
+      const post = posts[idx];
       const newText = prompt('编辑帖子：', post.text);
       if (newText === null || newText.trim() === '') return;
-      try {
-        await fetch(API_BASE, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id, text: newText.trim() })
-        });
-        renderPosts();
-      } catch (e) {
-        alert('编辑失败');
-      }
+      post.text = newText.trim();
+      posts.reverse();
+      savePosts(posts);
+      renderPosts();
     }
     renderPosts();
   </script>
