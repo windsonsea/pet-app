@@ -85,6 +85,21 @@
     }
 
     .hidden { display: none !important; }
+    
+    /* 礼花效果 */
+    .firework {
+      position: fixed;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      animation: firework 1s ease-out forwards;
+    }
+    @keyframes firework {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -631,6 +646,9 @@
         };
         checkins[today] = newRecord;
         saveCheckins(checkins);
+        if (newRecord.completed) {
+          launchFireworks();
+        }
         fetchCheckin();
       };
       
@@ -757,6 +775,29 @@
     function giveUp() {
       document.getElementById('game-msg').innerText = '答案是: ' + targetNum + ' 💡';
       document.getElementById('game-result').innerText = '再接再厉！';
+    }
+    
+    // 礼花效果
+    function createFirework(x, y, color) {
+      const firework = document.createElement('div');
+      firework.className = 'firework';
+      firework.style.left = x + 'px';
+      firework.style.top = y + 'px';
+      firework.style.background = color;
+      firework.style.boxShadow = '0 0 10px ' + color;
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    }
+    function launchFireworks() {
+      const colors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#ff6bff', '#00ff88'];
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const x = Math.random() * window.innerWidth;
+          const y = Math.random() * window.innerHeight * 0.6;
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          createFirework(x, y, color);
+        }, i * 50);
+      }
     }
   </script>
 </body>
