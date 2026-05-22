@@ -524,23 +524,43 @@
       localStorage.setItem(CHECKIN_KEY, JSON.stringify(checkins));
     }
     
-    function fetchCheckin() {
+    async function fetchCheckin() {
       const today = new Date().toISOString().split('T')[0];
       const checkins = getCheckins();
-      const isChecked = checkins[today] === true;
+      const record = checkins[today];
+      const isChecked = record && record.completed;
       
       const btn = document.getElementById('checkin-toggle');
       btn.innerHTML = isChecked ? '✅ 已打卡' : '⏳ 点击打卡';
       btn.style.cursor = 'pointer';
-      btn.onclick = () => {
-        const newState = !isChecked;
-        checkins[today] = newState;
+      btn.onclick = async () => {
+        btn.innerHTML = '⏳ 处理中...';
+        // 获取 IP
+        let ip = '未知';
+        try {
+          const ipRes = await fetch('https://api.ipify.org?format=json');
+          const ipData = await ipRes.json();
+          ip = ipData.ip;
+        } catch (e) {}
+        
+        const now = new Date();
+        const timeStr = now.toLocaleString('zh-CN');
+        const newRecord = {
+          completed: !isChecked,
+          time: timeStr,
+          ip: ip
+        };
+        checkins[today] = newRecord;
         saveCheckins(checkins);
         fetchCheckin();
       };
       
-      document.getElementById('checkin-status').innerHTML = 
-        isChecked ? '<p>✅ 今日已完成健康打卡！</p>' : '<p>🔔 提醒时间: 每天 21:00</p>';
+      if (isChecked && record) {
+        document.getElementById('checkin-status').innerHTML = 
+          '<p>✅ 今日已完成健康打卡！</p><p style="font-size:0.8rem;color:#8892b0;">🕐 ' + (record.time || '') + '</p><p style="font-size:0.8rem;color:#8892b0;">🌐 ' + (record.ip || '') + '</p>';
+      } else {
+        document.getElementById('checkin-status').innerHTML = '<p>🔔 提醒时间: 每天 21:00</p>';
+      }
     }
     fetchCheckin();
 
