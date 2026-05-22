@@ -350,6 +350,7 @@
 
     <div class="footer">
       <p>Powered by OpenClaw · 自托管 AI 助手 🐱</p>
+      <p style="margin-top:8px;">👥 访问次数: <span id="visitor-count">-</span></p>
     </div>
   </div>
 
@@ -550,6 +551,13 @@
     }
     updateClock();
     setInterval(updateClock, 1000);
+
+    // 访问计数
+    const VISITOR_KEY = 'pet-app-visitors';
+    let visitors = parseInt(localStorage.getItem(VISITOR_KEY) || '0');
+    visitors++;
+    localStorage.setItem(VISITOR_KEY, visitors.toString());
+    document.getElementById('visitor-count').innerText = visitors;
 
     // 每日语录
     const quotes = [
