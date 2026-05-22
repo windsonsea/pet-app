@@ -608,13 +608,16 @@
         // 获取 IP 和位置
         let ipInfo = '未知';
         try {
-          const res = await fetch('http://ip-api.com/json/?fields=status,country,city,query');
-          const data = await res.json();
-          if (data.status === 'success') {
-            ipInfo = data.country + ' ' + data.city + ' (' + data.query + ')';
-          } else {
-            ipInfo = '获取失败';
-          }
+          // 先获取 IP
+          const ipRes = await fetch('https://api.ipify.org?format=json');
+          const ipData = await ipRes.json();
+          const ip = ipData.ip;
+          // 再获取位置
+          const locRes = await fetch('https://ipapi.co/' + ip + '/json/');
+          const locData = await locRes.json();
+          const country = locData.country_name || '';
+          const city = locData.city || '';
+          ipInfo = country + ' ' + city + ' (' + ip + ')';
         } catch (e) {
           ipInfo = '获取失败';
         }
