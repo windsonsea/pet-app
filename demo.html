@@ -154,9 +154,9 @@
             <div class="feature-desc">每天 8:00 询问安排</div>
           </div>
           <div class="feature" data-feature="memory" onclick="showFeature('memory')">
-            <div class="feature-icon">🧠</div>
-            <div class="feature-title">记忆助手</div>
-            <div class="feature-desc">记住重要的事情</div>
+            <div class="feature-icon">💬</div>
+            <div class="feature-title">论坛</div>
+            <div class="feature-desc">记录和分享此刻</div>
           </div>
         </div>
       </div>
@@ -244,6 +244,7 @@
       <div class="section">
         <h2>💬 小论坛</h2>
         <div class="feature-detail">
+          <input id="forum-author" placeholder="你的昵称" style="width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:rgba(0,0,0,0.3);color:#fff;margin-bottom:10px;">
           <textarea id="forum-input" placeholder="写点什么..." style="width:100%;height:80px;padding:10px;border-radius:8px;border:1px solid #333;background:rgba(0,0,0,0.3);color:#fff;resize:none;margin-bottom:10px;"></textarea>
           <button onclick="addPost()" style="padding:8px 20px;border-radius:8px;border:none;background:linear-gradient(90deg,#00d9ff,#00ff88);color:#1a1a2e;font-weight:bold;cursor:pointer;">发布</button>
           <div id="forum-posts" style="margin-top:20px;"></div>
@@ -797,6 +798,7 @@
     
     // 小论坛功能
     const FORUM_KEY = 'pet-app-forum';
+    const AUTHOR_KEY = 'pet-app-author';
     function getPosts() {
       const data = localStorage.getItem(FORUM_KEY);
       return data ? JSON.parse(data) : [];
@@ -804,7 +806,15 @@
     function savePosts(posts) {
       localStorage.setItem(FORUM_KEY, JSON.stringify(posts));
     }
+    function getAuthor() {
+      return localStorage.getItem(AUTHOR_KEY) || '匿名';
+    }
+    function setAuthor(name) {
+      localStorage.setItem(AUTHOR_KEY, name);
+    }
     function renderPosts() {
+      // 显示保存的昵称
+      document.getElementById('forum-author').value = getAuthor();
       const posts = getPosts();
       const container = document.getElementById('forum-posts');
       if (posts.length === 0) {
@@ -814,6 +824,7 @@
       let html = '';
       posts.reverse().forEach((post, i) => {
         html += '<div style="background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;margin-bottom:10px;">' +
+          '<p style="font-size:0.85rem;color:#00d9ff;margin-bottom:5px;">👤 ' + post.author + '</p>' +
           '<p style="margin-bottom:5px;">' + post.text + '</p>' +
           '<p style="font-size:0.75rem;color:#8892b0;">' + post.time + '</p>' +
           '</div>';
@@ -822,10 +833,14 @@
     }
     function addPost() {
       const input = document.getElementById('forum-input');
+      const authorInput = document.getElementById('forum-author');
       const text = input.value.trim();
       if (!text) return;
+      const author = authorInput.value.trim() || '匿名';
+      setAuthor(author); // 保存昵称
       const posts = getPosts();
       posts.push({
+        author: author,
         text: text,
         time: new Date().toLocaleString('zh-CN')
       });
