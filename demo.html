@@ -640,7 +640,28 @@
       moods[today] = mood;
       localStorage.setItem(MOOD_KEY, JSON.stringify(moods));
       const icons = { happy: '😄', neutral: '😐', sad: '😢' };
-      document.getElementById('mood-result').innerText = '已记录: ' + (icons[mood] || '');
+      const quotes = {
+        happy: [
+          '今天真棒！继续保持这份快乐！✨',
+          '你的笑容真美，保持下去！🌟',
+          '快乐是一种选择，你选对了！💖',
+          '美好的一天，值得庆祝！🎉'
+        ],
+        neutral: [
+          '平凡也是一种幸福 ☕',
+          '保持平稳，继续前行 🚶',
+          '每一天都是新的开始 🌅',
+          '给自己一个微笑 😊'
+        ],
+        sad: [
+          '别难过，明天会更好 🌈',
+          '坚强的人值得被爱 💪',
+          '哭出来也没关系，我在呢 🤗',
+          '黑夜过去就是黎明 🌙'
+        ]
+      };
+      const quote = quotes[mood][Math.floor(Math.random() * quotes[mood].length)];
+      document.getElementById('mood-result').innerHTML = '<span style="color:#00ff88;">' + icons[mood] + '</span> ' + quote;
       updateMoodHistory();
     }
     function updateMoodHistory() {
