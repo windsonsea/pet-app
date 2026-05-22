@@ -748,6 +748,8 @@
     // 相册子分类
     function showAlbum(type) {
       const imgs = document.getElementById('album-images');
+      const cats = document.querySelector('#feature-album .features');
+      cats.style.display = 'none';
       imgs.style.display = 'grid';
       imgs.style.gridTemplateColumns = 'repeat(3,1fr)';
       imgs.style.gap = '8px';
@@ -764,7 +766,12 @@
       for (let i = 1; i <= m.count; i++) {
         html += '<img src="' + base + m.prefix + i + '.jpg" style="width:100%;border-radius:8px;cursor:pointer;" onclick="showModal(this.src)" loading="lazy">';
       }
+      html += '<button onclick="showAlbumBack()" style="grid-column:span 3;margin-top:10px;padding:10px;border-radius:8px;border:1px solid #00d9ff;background:transparent;color:#00d9ff;cursor:pointer;">← 返回分类</button>';
       imgs.innerHTML = html;
+    }
+    function showAlbumBack() {
+      document.getElementById('album-images').style.display = 'none';
+      document.querySelector('#feature-album .features').style.display = 'grid';
     }
   </script>
 </body>
