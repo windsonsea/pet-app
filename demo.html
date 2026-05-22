@@ -176,7 +176,17 @@
       <div class="section">
         <h2>🌤️ 天气播报</h2>
         <div class="feature-detail">
-          <h3>今日上海天气</h3>
+          <select id="city-select" onchange="changeCity()" style="padding:8px;border-radius:8px;border:1px solid #333;background:rgba(0,0,0,0.3);color:#fff;margin-bottom:10px;">
+            <option value="Shanghai">上海</option>
+            <option value="Beijing">北京</option>
+            <option value="Guangzhou">广州</option>
+            <option value="Shenzhen">深圳</option>
+            <option value="Hangzhou">杭州</option>
+            <option value="Chengdu">成都</option>
+            <option value="Wuhan">武汉</option>
+            <option value="Xian">西安</option>
+          </select>
+          <h3 id="weather-title">今日上海天气</h3>
           <div id="weather-content">
             <p>⏰ 正在获取天气...</p>
           </div>
@@ -485,9 +495,22 @@
     if (feature) showFeature(feature);
 
     // 动态获取天气
+    const CITY_KEY = 'pet-app-city';
+    function getCity() {
+      return localStorage.getItem(CITY_KEY) || 'Shanghai';
+    }
+    function setCity(city) {
+      localStorage.setItem(CITY_KEY, city);
+    }
+    
     async function fetchWeather() {
+      const city = getCity();
+      const cityNames = { Shanghai: '上海', Beijing: '北京', Guangzhou: '广州', Shenzhen: '深圳', Hangzhou: '杭州', Chengdu: '成都', Wuhan: '武汉', Xian: '西安' };
+      document.getElementById('weather-title').innerText = '今日' + (cityNames[city] || city) + '天气';
+      document.getElementById('city-select').value = city;
+      
       try {
-        const res = await fetch('https://wttr.in/Shanghai?format=j1');
+        const res = await fetch('https://wttr.in/' + city + '?format=j1');
         const data = await res.json();
         const c = data.current_condition[0];
         const temp = c.temp_C;
@@ -511,6 +534,12 @@
       }
     }
     fetchWeather();
+    
+    function changeCity() {
+      const city = document.getElementById('city-select').value;
+      setCity(city);
+      fetchWeather();
+    }
 
     // 打卡功能 (localStorage)
     const CHECKIN_KEY = 'pet-app-checkins';
